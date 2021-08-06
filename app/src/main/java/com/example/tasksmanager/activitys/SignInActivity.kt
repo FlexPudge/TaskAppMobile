@@ -57,7 +57,7 @@ class SignInActivity : AppCompatActivity() {
                         if ( loginResponse?.user_name != null) {
                             startActivity(Intent(this@SignInActivity, MainActivity::class.java))
 
-                            sessionManager.saveAuthToken(loginResponse.user_role)
+                            sessionManager.saveAuthToken(loginResponse.user_is_active)
                         } else {
                                     Log.d("TAG","error")
                         }

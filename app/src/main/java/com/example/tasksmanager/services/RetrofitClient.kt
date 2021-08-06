@@ -7,6 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 public class RetrofitClient {
 
+    //POST авторизация
+
     private lateinit var apiService: ApiService
 
     fun getApiService(): ApiService {
@@ -22,4 +24,5 @@ public class RetrofitClient {
 
         return apiService
     }
+
 }

@@ -19,7 +19,7 @@ class StartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
-        retrofitClient= RetrofitClient()
+        retrofitClient= RetrofitClient
         sessionManager = SessionManager(this)
 
 

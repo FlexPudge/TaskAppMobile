@@ -34,7 +34,7 @@ class SignInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_in)
 
 
-        retrofitClient= RetrofitClient()
+        retrofitClient= RetrofitClient
         sessionManager = SessionManager(this)
 
 

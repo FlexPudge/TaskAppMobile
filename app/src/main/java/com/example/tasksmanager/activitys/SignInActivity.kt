@@ -55,7 +55,11 @@ class SignInActivity : AppCompatActivity() {
                         Log.i("TAG","${loginResponse.toString()}")
 
                         if ( loginResponse?.user_name != null) {
-                            startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+                            //startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+                            val intent = Intent(this@SignInActivity, MainActivity::class.java)
+                            intent.putExtra("name",loginResponse.user_name)
+                            intent.putExtra("role",loginResponse.user_role)
+                            startActivity(intent)
 
                             sessionManager.saveAuthToken(loginResponse.user_is_active)
                         } else {

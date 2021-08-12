@@ -1,70 +1,86 @@
 package com.example.tasksmanager.adapters
 
 import android.content.Context
+import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tasksmanager.R
-import com.example.tasksmanager.models.TasksResponse
-import com.squareup.picasso.Picasso
+
+import com.example.tasksmanager.models.TasksResponseItem
 import kotlinx.android.synthetic.main.item_tasks.view.*
 
-class MyTasksAdapter
-    (private val context: Context, private val tasksList: MutableList<TasksResponse>)
-    : RecyclerView.Adapter<MyTasksAdapter.MyViewHolder>(){
 
-    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val tv_name: TextView = itemView.tv_name
-        val tv_creator: TextView = itemView.tv_creator
-        val tv_executor: TextView = itemView.tv_executor
-        val tv_status: TextView = itemView.tv_status
+class MyTasksAdapter(
 
-        fun bind(listItem: TasksResponse)  {
-            //image.setOnClickListener {
-            //    Toast.makeText(it.context, "нажал на ${itemView.image_movie}", Toast.LENGTH_SHORT)
-             //       .show()
-         //   }
-           itemView.setOnClickListener {
-               Toast.makeText(it.context, "нажал на ${itemView.tv_name.text}", Toast.LENGTH_SHORT).show()
+    val context: Context,
+    val taskList: List<TasksResponseItem>,
+   private val listener: onItemClickListener,
+
+
+    ) : RecyclerView.Adapter<MyTasksAdapter.MyViewHolder>() {
+   inner class MyViewHolder(itemView:View):RecyclerView.ViewHolder(itemView),View.OnClickListener {
+       val tv_name: TextView = itemView.tv_name
+       val tv_creator: TextView = itemView.tv_creator
+       val tv_executor: TextView = itemView.tv_executor
+       val tv_status: TextView = itemView.tv_status
+
+       init {
+           itemView.setOnClickListener(this)
+       }
+
+        override fun onClick(v: View?) {
+            val position: Int = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position,taskList )
             }
         }
+
+    }
+
+    interface onItemClickListener {
+        fun onItemClick(position: Int, taskList: List<TasksResponseItem>)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_tasks, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_tasks, parent, false)
         return MyViewHolder(itemView)
     }
 
-    override fun getItemCount() = tasksList.size
-
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val listItem = tasksList[position]
-        holder.bind(listItem)
-
-       // Picasso.get().load(tasksList[position].imageurl).into(holder.image)
-        holder.tv_name.setText("Название:  ${tasksList[position].name}")
-        if (tasksList[position].creator == null)
-        {
-            holder.tv_creator.setText("Создал: --")
-        }else {
-            holder.tv_creator.setText("Создал:  ${tasksList[position].creator}")
+    override fun onBindViewHolder(holder: MyTasksAdapter.MyViewHolder, position: Int) {
+        val task: TasksResponseItem = taskList[position]
+        holder.tv_name.text="Название:" +taskList[position].name
+        holder.tv_creator.setText("Создатель: ${CreatorStatus(holder,position)}")
+        holder.tv_executor.setText("Исполнитель:  ${taskList[position].executor}")
+        holder.tv_status.setText("Статус:  ${StatusTasks(holder, position)}")
+        holder.itemView.setOnClickListener{
+            listener.onItemClick(position,taskList)
         }
-
-        holder.tv_executor.setText("Исполнитель:  ${tasksList[position].executor}")
-        holder.tv_status.setText("Статус:  ${StatusTasks(holder,position)}")
     }
 
-    fun StatusTasks(holder: MyViewHolder,position: Int) = when(tasksList[position].status){
+    override fun getItemCount(): Int {
+        return taskList.size
+    }
+
+    fun CreatorStatus(holder: MyViewHolder,position: Int)=when (taskList[position].creator){
+
+
+        else -> "Незивестно"
+    }
+
+    fun StatusTasks(holder: MyViewHolder, position: Int) = when (taskList[position].status) {
 
         1 -> "в процессе"
-        2-> "выполнино"
-        3-> "отклонено"
+        2 -> "выполнино"
+        3 -> "отклонено"
 
         else -> "ожидает"
     }
 
 
 }
+
+

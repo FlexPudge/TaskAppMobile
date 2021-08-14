@@ -38,11 +38,24 @@ class SignInActivity : AppCompatActivity() {
         sessionManager = SessionManager(this)
 
 
+
+
+
         btn_sign_in.setOnClickListener {
 
             val user=et_user.text.toString()
 
+            if(et_user.text.toString().isEmpty()){
+                Toast.makeText(this, "Введите логин", Toast.LENGTH_SHORT).show()
+            }
+
+            if(et_password.text.toString().isEmpty()){
+                Toast.makeText(this, "Введите паспорт", Toast.LENGTH_SHORT).show()
+            }
+
             val password=et_password.text.toString()
+
+
 
             retrofitClient.getApiService().login(LoginModel(user = user, pass = password))
                 .enqueue(object : Callback<UserResponse> {
@@ -59,6 +72,7 @@ class SignInActivity : AppCompatActivity() {
                             val intent = Intent(this@SignInActivity, MainActivity::class.java)
                             intent.putExtra("name",loginResponse.user_name)
                             intent.putExtra("role",loginResponse.user_role)
+                            intent.putExtra("login",loginResponse.user_login)
                             startActivity(intent)
 
                             sessionManager.saveAuthToken(loginResponse.user_is_active)
@@ -74,18 +88,6 @@ class SignInActivity : AppCompatActivity() {
 
     }
 
-
-    fun validateLogin(user: Editable, pass: Editable): Boolean {
-        if (user == null || user.trim().isEmpty()) {
-            Toast.makeText(this, "Missing Username or Password", Toast.LENGTH_SHORT).show()
-            return false
-        }
-        if (pass == null || pass.trim().isEmpty()) {
-            Toast.makeText(this, "Missing Username or Password", Toast.LENGTH_SHORT).show()
-            return false
-        }
-        return true
-    }
 }
 
 

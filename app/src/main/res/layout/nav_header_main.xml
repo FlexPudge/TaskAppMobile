@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_username"
@@ -17,17 +17,22 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="10dp"
+            android:text="Имя"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
 
         <TextView
-            android:id="@+id/tv_userLastname"
+            android:id="@+id/tv_userRole"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:text="роль"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
+
     </LinearLayout>
 
     <View

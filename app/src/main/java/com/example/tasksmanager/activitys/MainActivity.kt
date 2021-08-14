@@ -3,20 +3,20 @@ package com.example.tasksmanager.activitys
 
 import android.app.AlertDialog
 import android.content.Intent
-
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tasksmanager.R
 import com.example.tasksmanager.adapters.MyTasksAdapter
-import com.example.tasksmanager.models.TasksResponseItem
-import com.example.tasksmanager.models.UserResponse
+import com.example.tasksmanager.models.TasksResponse
 import com.example.tasksmanager.services.ApiService
 import com.example.tasksmanager.services.RetrofitClient
+import com.google.android.material.internal.NavigationMenuItemView
 import com.google.android.material.navigation.NavigationView
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,6 +30,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     MyTasksAdapter.onItemClickListener {
     lateinit var mService: ApiService
@@ -37,14 +38,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var dialog: AlertDialog
     private lateinit var recyclerView: RecyclerView
-    private lateinit var userResponse: UserResponse
-    private lateinit var userList: MutableList<UserResponse>
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        nav_view.setNavigationItemSelectedListener(this)
 
 
         recyclerView = findViewById(R.id.recyclerView)
@@ -57,10 +57,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         fab_create_board.setOnClickListener {
             startActivity(Intent(this@MainActivity, CreateTaskActivity::class.java))
         }
+           val name = intent.extras?.getString("name")
+           val role = intent.extras?.getString("role")
+           val login = intent.extras?.getString("login")
 
+        val headerView = nav_view.getHeaderView(0)
+        val navUsername = headerView.findViewById<TextView>(R.id.tv_username)
+        val navUserLastname = headerView.findViewById<TextView>(R.id.tv_userRole)
+
+        navUsername.setText(name)
+        navUserLastname.setText(role)
 
         setupActionBar()
         getTasks()
+
+
 
 
     }
@@ -68,26 +79,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
 
-
-
-
     private fun getTasks() {
 
-        RetrofitClient.getTasks().tasks().enqueue(object : Callback<List<TasksResponseItem>?> {
+        RetrofitClient.getTasks().tasks().enqueue(object : Callback<List<TasksResponse>> {
             override fun onResponse(
-                call: Call<List<TasksResponseItem>?>,
-                response: Response<List<TasksResponseItem>?>,
+                call: Call<List<TasksResponse>>,
+                response: Response<List<TasksResponse>>,
             ) {
                 val responseBody = response.body()!!
+                Log.d("TAG"," ${responseBody}")
 
                 adapter = MyTasksAdapter(baseContext, responseBody, this@MainActivity)
                 adapter.notifyDataSetChanged()
                 recyclerView.adapter = adapter
 
 
+
+
             }
 
-            override fun onFailure(call: Call<List<TasksResponseItem>?>, t: Throwable) {
+            override fun onFailure(call: Call<List<TasksResponse>?>, t: Throwable) {
                 Log.d("MainActivity", "onFailure" + t.message)
             }
 
@@ -125,14 +136,44 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        TODO("Not yet implemented")
-    }
 
-    override fun onItemClick(position: Int, taskList: List<TasksResponseItem>) {
+
+    override fun onItemClick(position: Int, taskList: List<TasksResponse>) {
         val intent = Intent(this@MainActivity, AboutTasksActivity::class.java)
         intent.putExtra("id",taskList[position].id)
+        intent.putExtra("comment",taskList[position].comment)
+        intent.putExtra("created",taskList[position].created)
+        intent.putExtra("creator",taskList[position].creator)
+        intent.putExtra("deadline",taskList[position].deadline)
+        intent.putExtra("description",taskList[position].description)
+        intent.putExtra("executor",taskList[position].executor)
+        intent.putExtra("name",taskList[position].name)
+        intent.putExtra("status",taskList[position].status.toString())
         startActivity(intent)
+    }
+
+    override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
+        val login = intent.extras?.getString("login")
+        when (menuItem.itemId) {
+            R.id.nav_my_profile -> {
+
+                val intent = Intent(this@MainActivity, UserProfilActivity::class.java)
+                intent.putExtra("name",tv_username.text.toString())
+                intent.putExtra("role",tv_userRole.text.toString())
+                intent.putExtra("login", login)
+                startActivity(intent)
+
+
+
+                Log.d("TAG","open this door ")
+            }
+
+            R.id.nav_sign_out -> {
+
+            }
+        }
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
     }
 
 

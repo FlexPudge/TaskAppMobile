@@ -1,20 +1,10 @@
 package com.example.tasksmanager.activitys
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.example.tasksmanager.R
-import com.example.tasksmanager.models.LoginModel
-import com.example.tasksmanager.models.TaskCreateRequest
-import com.example.tasksmanager.models.TasksResponseItem
-import com.example.tasksmanager.models.UserResponse
 import com.example.tasksmanager.services.RetrofitClient
 import kotlinx.android.synthetic.main.activity_create_task.*
-import kotlinx.android.synthetic.main.activity_sign_in.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class CreateTaskActivity : AppCompatActivity() {
 
@@ -39,24 +29,7 @@ class CreateTaskActivity : AppCompatActivity() {
             val deadline = et_deadlineTask_t.text.toString()
 
 
-            retrofitClient.postTask().taskCreate(TaskCreateRequest(
-                name = name,description = description,
-                creator = creator,executor = executor,
-                comment = comment,deadline = deadline))
-                .enqueue(object : Callback<List<TasksResponseItem>> {
-                    override fun onResponse(
-                        call: Call<List<TasksResponseItem>>,
-                        response: Response<List<TasksResponseItem>>,
-                    ) {
-                        val taskResponse = response.body()
-                        Log.i("TAG","${taskResponse.toString()}")
-                    }
 
-                    override fun onFailure(call: Call<List<TasksResponseItem>>, t: Throwable) {
-                        Log.d("TAG","error ${t.localizedMessage}")
-                    }
-
-                })
 
 
         }

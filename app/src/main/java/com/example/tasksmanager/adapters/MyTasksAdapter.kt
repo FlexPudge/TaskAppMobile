@@ -1,7 +1,6 @@
 package com.example.tasksmanager.adapters
 
 import android.content.Context
-import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,15 +8,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tasksmanager.R
 
-import com.example.tasksmanager.models.TasksResponseItem
+import com.example.tasksmanager.models.TasksResponse
 import kotlinx.android.synthetic.main.item_tasks.view.*
 
 
 class MyTasksAdapter(
 
     val context: Context,
-    val taskList: List<TasksResponseItem>,
-   private val listener: onItemClickListener,
+    val taskList: List<TasksResponse>,
+    private val listener: onItemClickListener,
 
 
     ) : RecyclerView.Adapter<MyTasksAdapter.MyViewHolder>() {
@@ -41,7 +40,7 @@ class MyTasksAdapter(
     }
 
     interface onItemClickListener {
-        fun onItemClick(position: Int, taskList: List<TasksResponseItem>)
+        fun onItemClick(position: Int, taskList: List<TasksResponse>)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -51,7 +50,7 @@ class MyTasksAdapter(
     }
 
     override fun onBindViewHolder(holder: MyTasksAdapter.MyViewHolder, position: Int) {
-        val task: TasksResponseItem = taskList[position]
+        val task: TasksResponse = taskList[position]
         holder.tv_name.text="Название:" +taskList[position].name
         holder.tv_creator.setText("Создатель: ${CreatorStatus(holder,position)}")
         holder.tv_executor.setText("Исполнитель:  ${taskList[position].executor}")

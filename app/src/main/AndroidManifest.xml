@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TasksManager"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activitys.CreateTaskActivity"></activity>
+        <activity android:name=".activitys.UserProfilActivity"></activity>
+        <activity android:name=".activitys.CreateTaskActivity" />
         <activity android:name=".activitys.AboutTasksActivity" />
         <activity android:name=".activitys.LoadingActivity" />
         <activity android:name=".activitys.StartActivity">

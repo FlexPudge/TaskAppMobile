@@ -34,8 +34,10 @@ class SignInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_in)
 
 
-        retrofitClient= RetrofitClient
+        retrofitClient = RetrofitClient
         sessionManager = SessionManager(this)
+
+        Log.d("TAG", "Проверка ${sessionManager.saveAuthToken(token = String())}")
 
 
 
@@ -43,41 +45,44 @@ class SignInActivity : AppCompatActivity() {
 
         btn_sign_in.setOnClickListener {
 
-            val user=et_user.text.toString()
+            val user = et_user.text.toString()
 
-            if(et_user.text.toString().isEmpty()){
+            if (et_user.text.toString().isEmpty()) {
                 Toast.makeText(this, "Введите логин", Toast.LENGTH_SHORT).show()
             }
 
-            if(et_password.text.toString().isEmpty()){
+            if (et_password.text.toString().isEmpty()) {
                 Toast.makeText(this, "Введите паспорт", Toast.LENGTH_SHORT).show()
             }
 
-            val password=et_password.text.toString()
+            val password = et_password.text.toString()
 
 
 
             retrofitClient.getApiService().login(LoginModel(user = user, pass = password))
                 .enqueue(object : Callback<UserResponse> {
                     override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-                        Log.d("TAG","error ${t.localizedMessage}")
+                        Log.d("TAG", "error ${t.localizedMessage}")
                     }
 
-                    override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                    override fun onResponse(
+                        call: Call<UserResponse>,
+                        response: Response<UserResponse>
+                    ) {
                         val loginResponse = response.body()
-                        Log.i("TAG","${loginResponse.toString()}")
+                        Log.i("TAG", "${loginResponse.toString()}")
 
-                        if ( loginResponse?.user_name != null) {
+                        if (loginResponse?.user_name != null) {
                             //startActivity(Intent(this@SignInActivity, MainActivity::class.java))
                             val intent = Intent(this@SignInActivity, MainActivity::class.java)
-                            intent.putExtra("name",loginResponse.user_name)
-                            intent.putExtra("role",loginResponse.user_role)
-                            intent.putExtra("login",loginResponse.user_login)
+                            intent.putExtra("name", loginResponse.user_name)
+                            intent.putExtra("role", loginResponse.user_role)
+                            intent.putExtra("login", loginResponse.user_login)
                             startActivity(intent)
 
                             sessionManager.saveAuthToken(loginResponse.user_is_active)
                         } else {
-                                    Log.d("TAG","error")
+                            Log.d("TAG", "error")
                         }
                     }
                 })
@@ -87,7 +92,6 @@ class SignInActivity : AppCompatActivity() {
 
 
     }
-
 }
 
 

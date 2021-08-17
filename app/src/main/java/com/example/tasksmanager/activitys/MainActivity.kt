@@ -54,12 +54,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         recyclerView.layoutManager = linearLayoutManager
         dialog = SpotsDialog.Builder().setCancelable(true).setContext(this).build()
 
+        val name = intent.extras?.getString("name")
+        val role = intent.extras?.getString("role")
+
         fab_create_board.setOnClickListener {
-            startActivity(Intent(this@MainActivity, CreateTaskActivity::class.java))
+            val intent = Intent(this@MainActivity, CreateTaskActivity::class.java)
+            intent.putExtra("role", role)
+            startActivity(intent)
         }
-           val name = intent.extras?.getString("name")
-           val role = intent.extras?.getString("role")
-           val login = intent.extras?.getString("login")
+
 
         val headerView = nav_view.getHeaderView(0)
         val navUsername = headerView.findViewById<TextView>(R.id.tv_username)

@@ -30,6 +30,8 @@ class MyTasksAdapter(
            itemView.setOnClickListener(this)
        }
 
+
+
         override fun onClick(v: View?) {
             val position: Int = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
@@ -51,33 +53,37 @@ class MyTasksAdapter(
 
     override fun onBindViewHolder(holder: MyTasksAdapter.MyViewHolder, position: Int) {
         val task: TasksResponse = taskList[position]
-        holder.tv_name.text="Название:" +taskList[position].name
-        holder.tv_creator.setText("Создатель: ${CreatorStatus(holder,position)}")
-        holder.tv_executor.setText("Исполнитель:  ${taskList[position].executor}")
-        holder.tv_status.setText("Статус:  ${StatusTasks(holder, position)}")
+        holder.tv_name.setText("Название: ${taskList[position].name}")
+        holder.tv_creator.setText("Создатель: ${CreatorStatus(position)}")
+        holder.tv_executor.setText("Исполнитель: ${taskList[position].executor}")
+        holder.tv_status.setText(StatusTasks(position))
         holder.itemView.setOnClickListener{
             listener.onItemClick(position,taskList)
         }
     }
 
+
+
     override fun getItemCount(): Int {
         return taskList.size
     }
 
-    fun CreatorStatus(holder: MyViewHolder,position: Int)=when (taskList[position].creator){
-
-
-        else -> "Незивестно"
-    }
-
-    fun StatusTasks(holder: MyViewHolder, position: Int) = when (taskList[position].status) {
+    fun StatusTasks(position: Int) = when (taskList[position].status) {
 
         1 -> "в процессе"
-        2 -> "выполнино"
+        2 -> "выполнено"
         3 -> "отклонено"
 
         else -> "ожидает"
     }
+
+    fun CreatorStatus(position: Int)=when (taskList[position].creator){
+
+
+        else -> "Неизвестно"
+    }
+
+
 
 
 }

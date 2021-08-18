@@ -10,18 +10,20 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
+        android:backgroundTint="@color/toolbarColor"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_aboutTask_activity"
             android:layout_width="match_parent"
-            android:layout_height="60dp"/>
+            android:layout_height="50dp"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
+
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
@@ -40,12 +42,16 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/TextItput"
+                    android:textColorHint="@color/black"
+                    app:hintTextColor="@color/black"
                     android:layout_marginTop="10dp">
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/et_nameTask"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:hint="Название"
                         android:textSize="16sp" />
 
@@ -54,12 +60,16 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColorHint="@color/black"
+                    app:hintTextColor="@color/black"
+                    style="@style/TextItput"
                     android:layout_marginTop="10dp">
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/et_creatorTasks"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:hint="Создал"
                         android:textSize="16sp" />
 
@@ -68,12 +78,16 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColorHint="@color/black"
+                    app:hintTextColor="@color/black"
+                    style="@style/TextItput"
                     android:layout_marginTop="10dp">
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/et_deadlineTask_t"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:hint="Крайний срок"
                         android:textSize="16sp" />
 
@@ -82,12 +96,16 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColorHint="@color/black"
+                    app:hintTextColor="@color/black"
+                    style="@style/TextItput"
                     android:layout_marginTop="10dp">
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/et_descriptionTask"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:hint="Описание"
                         android:textSize="16sp" />
 
@@ -95,12 +113,16 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColorHint="@color/black"
+                    app:hintTextColor="@color/black"
+                    style="@style/TextItput"
                     android:layout_marginTop="10dp">
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/et_executorTask"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:hint="Исполнитель"
                         android:textSize="16sp" />
 
@@ -109,12 +131,16 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColorHint="@color/black"
+                    app:hintTextColor="@color/black"
+                    style="@style/TextItput"
                     android:layout_marginTop="10dp">
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/et_commentTask"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:hint="Комментарий"
                         android:textSize="16sp" />
 
@@ -126,10 +152,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="30dp"
+                    android:layout_marginStart="80dp"
+                    android:layout_margin="80dp"
                     android:backgroundTint="@color/black"
                     android:gravity="center"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
                     android:text="Создать"
                     android:textColor="@android:color/white"
                     android:textSize="16sp" />

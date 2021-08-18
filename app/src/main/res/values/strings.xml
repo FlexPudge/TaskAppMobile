@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">TasksManager</string>
+    <string name="login_text">Логин</string>
+    <string name="pass_text">Пароль</string>
+
+    <string-array name="Status">
+        <item>в процессе</item>
+        <item>выполнено</item>
+        <item>отклонено</item>
+        <item>ожидает</item>
+    </string-array>
+
+
+
+
 </resources>

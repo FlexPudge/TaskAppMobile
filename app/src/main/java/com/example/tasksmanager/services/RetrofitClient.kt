@@ -22,6 +22,26 @@ object RetrofitClient {
 
 
 
+    // post изменение статуса задачи
+
+    fun postChangeStatusTask():ApiService{
+
+        if (!::apiService.isInitialized) {
+            val retrofit = Retrofit.Builder()
+                .baseUrl("http://kassa67.ru:40010")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            apiService = retrofit.create(ApiService::class.java)
+        }
+
+        return apiService
+
+
+
+    }
+
+
     //post создание задачи
 
     fun postTask():ApiService{
@@ -43,7 +63,7 @@ object RetrofitClient {
 
 
 
-    //get запрос на получение тасков
+    //get запрос на получение задаччч
     fun getTasks(): ApiService  {
 
         if (!::apiService.isInitialized) {

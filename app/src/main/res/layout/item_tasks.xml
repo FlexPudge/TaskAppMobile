@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     android:id="@+id/cd_item"
+    android:clickable="true"
+    android:focusable="true"
+    style="@style/CardView"
+    android:checkable="true"
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,7 +16,8 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:backgroundTint="@color/back"
+        android:padding="15dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,18 +47,29 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:text="Кому" />
-            <TextView
-                android:id="@+id/tv_status"
+
+            <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_status_text"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:text="Статус:" />
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text="В процессе" />
 
-
-
+            </LinearLayout>
 
         </LinearLayout>
+
     </LinearLayout>
 
     <View
@@ -61,4 +78,6 @@
         android:layout_marginTop="5dp"
         android:background="@color/black" />
 
-</androidx.cardview.widget.CardView>
+
+
+</com.google.android.material.card.MaterialCardView>

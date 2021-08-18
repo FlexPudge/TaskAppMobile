@@ -14,6 +14,10 @@ import retrofit2.http.*
     fun taskCreate(@Body  request:TaskCreateRequest): Call<ResponseOK>
 
 
+    @POST("/task/status")
+    fun taskChangeStatus(@Body  request:ChangeTaskStatusRequest): Call<ResponseOK>
+
+
     @GET("/tasks")
     fun tasks(): Call<List<TasksResponse>>
 

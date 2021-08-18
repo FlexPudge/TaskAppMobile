@@ -5,51 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
     tools:context=".activitys.SignInActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="вход"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-    </androidx.appcompat.widget.Toolbar>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:text="Введи данные чтобы продолжить"
-            android:textColor="@color/gray"
-            android:textSize="16sp" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="25dp"
-            android:elevation="10dp"
-            app:cardCornerRadius="10dp">
-
             <LinearLayout
-                android:background="#FFF5EE"
+
+                android:layout_marginTop="200dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -58,15 +18,19 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColorHint="@color/back"
                     android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp">
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_email"
+                    app:endIconTint="@color/back"
 
+                    android:layout_marginEnd="16dp">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/et_user"
-                        android:backgroundTint="@color/white"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Логин"
+                        android:hint="@string/login_text"
+                        android:textColor="@color/black"
                         android:inputType="textEmailAddress"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -75,16 +39,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:textColorHint="@color/back"
+                    app:endIconTint="@color/back"
                     android:layout_marginTop="15dp"
+                    app:endIconMode="password_toggle"
+                    app:endIconCheckable="true"
                     android:layout_marginEnd="16dp">
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/et_password"
-                        android:backgroundTint="@color/white"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Пароль"
+                        android:hint="@string/pass_text"
                         android:inputType="textPassword"
+                        android:textColor="@color/back"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,21 +61,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginEnd="90dp"
                     android:layout_marginTop="30dp"
-                    android:layout_marginEnd="20dp"
-                    android:backgroundTint="@color/black"
+                    android:backgroundTint="@color/back"
                     android:gravity="center"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
                     android:text="Вход"
                     android:textColor="@android:color/white"
                     android:textSize="16sp" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+
 
 
     </LinearLayout>
 
 
-</LinearLayout>

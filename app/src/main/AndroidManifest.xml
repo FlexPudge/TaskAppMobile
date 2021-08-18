@@ -12,19 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TasksManager"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activitys.UserProfilActivity"></activity>
-        <activity android:name=".activitys.CreateTaskActivity" />
-        <activity android:name=".activitys.AboutTasksActivity" />
-        <activity android:name=".activitys.LoadingActivity" />
-        <activity android:name=".activitys.StartActivity">
+
+        <activity android:name=".activitys.SignInActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activitys.SignInActivity" />
+
         <activity android:name=".activitys.MainActivity" />
+        <activity android:name=".activitys.UserProfilActivity"/>
+        <activity android:name=".activitys.CreateTaskActivity" />
+        <activity android:name=".activitys.AboutTasksActivity" />
+        <activity android:name=".activitys.LoadingActivity" />
+        <activity android:name=".activitys.StartActivity"/>
     </application>
 
 </manifest>

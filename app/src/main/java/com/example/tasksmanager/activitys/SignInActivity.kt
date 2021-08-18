@@ -47,12 +47,12 @@ class SignInActivity : AppCompatActivity() {
 
             val user = et_user.text.toString()
 
-            if (et_user.text.toString().isEmpty()) {
+           if (et_user.text.toString().isEmpty()) {
                 Toast.makeText(this, "Введите логин", Toast.LENGTH_SHORT).show()
-            }
+        }
 
             if (et_password.text.toString().isEmpty()) {
-                Toast.makeText(this, "Введите паспорт", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Введите пароль", Toast.LENGTH_SHORT).show()
             }
 
             val password = et_password.text.toString()
@@ -82,6 +82,7 @@ class SignInActivity : AppCompatActivity() {
 
                             sessionManager.saveAuthToken(loginResponse.user_is_active)
                         } else {
+                            Toast.makeText(applicationContext,"Неправильно введены логин или пароль!", Toast.LENGTH_SHORT).show()
                             Log.d("TAG", "error")
                         }
                     }

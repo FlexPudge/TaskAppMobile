@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         recyclerView.layoutManager = linearLayoutManager
         dialog = SpotsDialog.Builder().setCancelable(true).setContext(this).build()
 
+
+
         val name = intent.extras?.getString("name")
         val role = intent.extras?.getString("role")
 
@@ -112,7 +114,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun setupActionBar() {
 
-        setSupportActionBar(toolbar_main_activity)
+      //  setSupportActionBar()
         toolbar_main_activity.setNavigationIcon(R.drawable.ic_action_navigation_menu)
 
         toolbar_main_activity.setNavigationOnClickListener {
@@ -151,7 +153,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         intent.putExtra("description",taskList[position].description)
         intent.putExtra("executor",taskList[position].executor)
         intent.putExtra("name",taskList[position].name)
-        intent.putExtra("status",taskList[position].status.toString())
+        val _stat=findViewById<TextView>(R.id.tv_status)
+        intent.putExtra("status",_stat.text.toString())
         startActivity(intent)
     }
 

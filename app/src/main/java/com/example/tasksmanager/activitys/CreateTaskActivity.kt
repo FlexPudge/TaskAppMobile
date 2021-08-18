@@ -47,7 +47,7 @@ class CreateTaskActivity : AppCompatActivity() {
             val creator = et_creatorTasks.text.toString()
             val executor = et_executorTask.text.toString()
             val comment = et_commentTask.text.toString()
-            val deadline=et_deadlineTask_t.text.toString()
+            val deadline=et_deadlineTask_t?.text.toString()
 
             retrofitClient.postTask().taskCreate(TaskCreateRequest(name = name,description=description,creator=creator,executor = executor,comment = comment,deadline = deadline))
                 .enqueue(object : Callback<ResponseOK> {
@@ -68,30 +68,10 @@ class CreateTaskActivity : AppCompatActivity() {
         }
 
 
-
-
-            //"name"
-           // "coment"
-          //  "creator"
-          //  "deadline": null,
-          //  "description"
-         //   "executor"
-
-
-
     }
 
     private fun setupActionBar() {
-
-        setSupportActionBar(toolbar_aboutTask_activity)
-
-        val actionBar = supportActionBar
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_back)
-            //  actionBar.title = resources.getString(R.string.profil)
-        }
-
+            toolbar_aboutTask_activity.setNavigationIcon(R.drawable.ic_back)
         toolbar_aboutTask_activity.setNavigationOnClickListener { onBackPressed() }
     }
 }

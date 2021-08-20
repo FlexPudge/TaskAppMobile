@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tasksmanager.R
-
 import com.example.tasksmanager.models.TasksResponse
 import kotlinx.android.synthetic.main.item_tasks.view.*
 
@@ -62,11 +62,10 @@ class MyTasksAdapter(
         }
     }
 
-
-
     override fun getItemCount(): Int {
         return taskList.size
     }
+
 
     fun StatusTasks(position: Int) = when (taskList[position].status) {
 
@@ -82,7 +81,6 @@ class MyTasksAdapter(
 
         else -> "Неизвестно"
     }
-
 
 
 

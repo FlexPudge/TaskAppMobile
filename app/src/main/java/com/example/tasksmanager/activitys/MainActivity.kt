@@ -1,22 +1,24 @@
 package com.example.tasksmanager.activitys
 
 
+import android.R.attr.data
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.tasksmanager.R
 import com.example.tasksmanager.adapters.MyTasksAdapter
 import com.example.tasksmanager.models.TasksResponse
 import com.example.tasksmanager.services.ApiService
 import com.example.tasksmanager.services.RetrofitClient
-import com.google.android.material.internal.NavigationMenuItemView
 import com.google.android.material.navigation.NavigationView
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_main.*
@@ -38,6 +40,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var dialog: AlertDialog
     private lateinit var recyclerView: RecyclerView
+    private lateinit var taskList: List<TasksResponse>
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
 
 
@@ -46,13 +50,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         nav_view.setNavigationItemSelectedListener(this)
 
-
         recyclerView = findViewById(R.id.recyclerView)
         mService = RetrofitClient.getTasks()
         recyclerView.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
         dialog = SpotsDialog.Builder().setCancelable(true).setContext(this).build()
+
+        taskList= listOf()
+        swipeRefreshLayout=findViewById(R.id.swipeRefreshLayout)
+
+
+
+
+
+
 
 
 
@@ -78,8 +90,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
 
+        swipeRefreshLayout.setOnRefreshListener {
+            getTasks()
+            Toast.makeText(this,"страница обновлена!",Toast.LENGTH_SHORT).show()
+            swipeRefreshLayout.isRefreshing=false
+        }
+
 
     }
+
+
+
+
 
 
 

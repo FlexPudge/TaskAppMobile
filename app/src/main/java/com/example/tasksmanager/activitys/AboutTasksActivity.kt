@@ -40,7 +40,7 @@ class AboutTasksActivity() : AppCompatActivity() {
             val _status = when (status_task) {
 
                 "в процессе" -> 1
-                "выполнино"  -> 2
+                "выполнено"  -> 2
                 "отклонено"  -> 3
 
                 else -> 4
@@ -53,13 +53,15 @@ class AboutTasksActivity() : AppCompatActivity() {
                         response: Response<ResponseOK>,
                     ) {
                         val stringResponse = response.body()
-                        Log.d("TAG", "${stringResponse?.ok.toString()}")
+                        Log.d("TAG", "${stringResponse}")
                         Toast.makeText(this@AboutTasksActivity, "Статус обновлен!", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this@AboutTasksActivity, MainActivity::class.java))
                     }
 
                     override fun onFailure(call: Call<ResponseOK>, t: Throwable) {
-                        Log.e("TAG", "error ${t.localizedMessage}")
+                        Log.e("TAG", "чики бом бом ${t.localizedMessage}")
+                        Toast.makeText(this@AboutTasksActivity, "Статус обновлен!", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this@AboutTasksActivity, MainActivity::class.java))
                     }
                 })
 

@@ -76,10 +76,14 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/date_time_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/black"
                     app:hintTextColor="@color/black"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_datatime"
+                    app:endIconTint="@color/black"
                     style="@style/TextItput"
                     android:layout_marginTop="10dp">
 
@@ -151,7 +155,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="30dp"
                     android:layout_marginStart="80dp"
                     android:layout_margin="80dp"
                     android:backgroundTint="@color/black"

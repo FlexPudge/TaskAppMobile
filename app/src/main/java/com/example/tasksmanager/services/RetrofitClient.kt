@@ -1,13 +1,10 @@
 package com.example.tasksmanager.services
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import android.util.JsonReader
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 
 object RetrofitClient {
@@ -20,7 +17,11 @@ object RetrofitClient {
 
     val baseUrl = "http://kassa67.ru:40010"
 
+    val json = GsonBuilder().generateNonExecutableJson().setLenient().create()
 
+
+
+    var client = OkHttpClient()
 
     // post изменение статуса задачи
 
@@ -29,7 +30,8 @@ object RetrofitClient {
         if (!::apiService.isInitialized) {
             val retrofit = Retrofit.Builder()
                 .baseUrl("http://kassa67.ru:40010")
-                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create(json))
                 .build()
 
             apiService = retrofit.create(ApiService::class.java)

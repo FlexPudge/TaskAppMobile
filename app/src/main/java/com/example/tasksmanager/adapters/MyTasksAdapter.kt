@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tasksmanager.R
 import com.example.tasksmanager.models.TasksResponse
 import kotlinx.android.synthetic.main.item_tasks.view.*
+import kotlin.reflect.jvm.internal.impl.load.java.lazy.descriptors.DeclaredMemberIndex
 
 
 class MyTasksAdapter(
-
     val context: Context,
     val taskList: List<TasksResponse>,
     private val listener: onItemClickListener,
@@ -54,7 +54,13 @@ class MyTasksAdapter(
     override fun onBindViewHolder(holder: MyTasksAdapter.MyViewHolder, position: Int) {
         val task: TasksResponse = taskList[position]
         holder.tv_name.setText("Название: ${taskList[position].name}")
-        holder.tv_creator.setText("Создатель: ${CreatorStatus(position)}")
+
+        if (taskList[position].creator==null && taskList[position].creator.isNullOrEmpty() )
+        {
+            holder.tv_creator.setText("Создатель: неизвестно")
+        }else{
+            holder.tv_creator.setText("Создатель: ${taskList[position].creator}")
+        }
         holder.tv_executor.setText("Исполнитель: ${taskList[position].executor}")
         holder.tv_status.setText(StatusTasks(position))
         holder.itemView.setOnClickListener{
@@ -76,10 +82,9 @@ class MyTasksAdapter(
         else -> "ожидает"
     }
 
-    fun CreatorStatus(position: Int)=when (taskList[position].creator){
+    fun CreatorStatus(taskList: List<TasksResponse>){
 
 
-        else -> "Неизвестно"
     }
 
 

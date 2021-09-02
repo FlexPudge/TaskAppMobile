@@ -21,6 +21,9 @@ import retrofit2.http.*
     @GET("/tasks")
     fun tasks(): Call<List<TasksResponse>>
 
+     @GET("/get_workers")
+     fun employee(): Call<List<EmployeeResponse>>
+
 
 
  }

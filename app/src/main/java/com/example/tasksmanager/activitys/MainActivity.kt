@@ -3,6 +3,7 @@ package com.example.tasksmanager.activitys
 
 import android.R.attr.data
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var recyclerView: RecyclerView
     private lateinit var taskList: List<TasksResponse>
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-
+    var alertDialog: AlertDialog? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -155,6 +156,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onBackPressed() {
+
+        alertDialog?.show()
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
@@ -197,12 +200,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_sign_out -> {
+                val alertDialogBuilder = AlertDialog.Builder(this)
+                alertDialogBuilder.setTitle("Выход")
+                alertDialogBuilder.setMessage("Вы действительно хотите выйти?")
+                alertDialogBuilder.setPositiveButton("Да") { _: DialogInterface, _: Int ->
+                    finish()
+                }
+                alertDialogBuilder.setNegativeButton("Назад",
+                    { dialogInterface: DialogInterface, i: Int -> })
+                    .show()
+                alertDialog = alertDialogBuilder.create()
 
             }
+
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
+
+
+
+
 
 
 }

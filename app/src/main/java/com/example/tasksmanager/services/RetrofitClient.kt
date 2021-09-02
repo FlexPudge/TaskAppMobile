@@ -20,12 +20,34 @@ object RetrofitClient {
     val json = GsonBuilder().generateNonExecutableJson().setLenient().create()
 
 
-
     var client = OkHttpClient()
+
+
+    //get выбор пользователя
+
+    fun getTaskEmployeeSelection(): ApiService {
+
+        if (!::apiService.isInitialized) {
+            val retrofit = Retrofit.Builder()
+                .baseUrl("http://kassa67.ru:40010")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build()
+
+            apiService = retrofit.create(ApiService::class.java)
+        }
+
+        return apiService
+
+    }
+
+
+
 
     // post изменение статуса задачи
 
-    fun postChangeStatusTask():ApiService{
+
+    fun postChangeStatusTask(): ApiService {
 
         if (!::apiService.isInitialized) {
             val retrofit = Retrofit.Builder()
@@ -38,15 +60,12 @@ object RetrofitClient {
         }
 
         return apiService
-
-
-
     }
 
 
     //post создание задачи
 
-    fun postTask():ApiService{
+    fun postTask(): ApiService {
 
         if (!::apiService.isInitialized) {
             val retrofit = Retrofit.Builder()
@@ -59,14 +78,11 @@ object RetrofitClient {
 
         return apiService
 
-
-
     }
 
 
-
     //get запрос на получение задаччч
-    fun getTasks(): ApiService  {
+    fun getTasks(): ApiService {
 
         if (!::apiService.isInitialized) {
             val retrofitBuilder = Retrofit.Builder()
@@ -74,7 +90,7 @@ object RetrofitClient {
                 .baseUrl(baseUrl)
                 .build()
 
-            apiService=retrofitBuilder.create(ApiService::class.java)
+            apiService = retrofitBuilder.create(ApiService::class.java)
 
         }
         return apiService
@@ -95,7 +111,6 @@ object RetrofitClient {
 
         return apiService
     }
-
 
 
 }

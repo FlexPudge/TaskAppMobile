@@ -24,9 +24,6 @@ class UserProfilActivity : AppCompatActivity() {
     }
 
     private fun setupActionBar() {
-
-        setSupportActionBar(toolbar_profile_activity)
-
         val actionBar = supportActionBar
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
